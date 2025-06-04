@@ -1,9 +1,9 @@
 {{define "TaskList" }}
 
-    <div class="w-[25rem] px-4 border-2 border-solid border-black">
+    <div class="w-auto px-4">
         <ul class="bg-white rounded-md shadow-md divide-y divide-gray-200">
             {{range .Tasks}}
-                <li class="flex items-center px-6 py-4">
+                <li class="flex items-center px-6 py-4 w-[26rem]">
                     <input
                         type="checkbox"
                         name="status"

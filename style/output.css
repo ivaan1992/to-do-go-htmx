@@ -635,6 +635,26 @@ video {
   width: 100%;
 }
 
+.w-auto {
+  width: auto;
+}
+
+.w-24 {
+  width: 6rem;
+}
+
+.w-60 {
+  width: 15rem;
+}
+
+.w-96 {
+  width: 24rem;
+}
+
+.w-\[26rem\] {
+  width: 26rem;
+}
+
 .max-w-md {
   max-width: 28rem;
 }

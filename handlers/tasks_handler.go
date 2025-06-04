@@ -6,6 +6,7 @@ import (
 	"to-do-list/models"
 )
 
+// Show Tasks
 func FetchTasks(w http.ResponseWriter, r *http.Request) {
 	database := db.DB
 	defer database.Close()
