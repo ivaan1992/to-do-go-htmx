@@ -39,7 +39,7 @@ func ToggleThemeHandler(w http.ResponseWriter, r *http.Request) {
 
 	data := GetCurrentTheme()
 
-	tmpl := template.Must(template.ParseFiles("templates/header.html"))
+	tmpl := template.Must(template.ParseFiles("templates/Header.html"))
 	err := tmpl.ExecuteTemplate(w, "Header", data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

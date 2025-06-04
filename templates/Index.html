@@ -13,11 +13,9 @@
         {{template "Header" .Theme}}
     </header>
 
-    <main class="w-full h-full flex flex-col justify-center items-center">
-        <div>
+    <main class="w-full min-h-screen bg-gray-100 flex flex-col items-center pt-10">
+            {{ template "TaskForm" }}
             {{ template "TaskList" .}}
-            <h1>holaaaa</h1>
-        </div>
     </main>
 
     <div>

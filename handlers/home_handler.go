@@ -4,17 +4,18 @@ import (
 	"net/http"
 	"text/template"
 	"to-do-list/db"
+	"to-do-list/models"
 )
 
 var tmpl = template.Must(template.ParseGlob("templates/*.html"))
 
 type PageData struct {
 	Theme ThemeData
-	Tasks []Task
+	Tasks []models.Task
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	tasks, err := GetAllTasks(db.DB)
+	tasks, err := models.GetAllTasks(db.DB)
 	if err != nil {
 		http.Error(w, "Error fetching tasks: "+err.Error(), http.StatusInternalServerError)
 		return
@@ -25,7 +26,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		Tasks: tasks,
 	}
 
-	err = tmpl.ExecuteTemplate(w, "index.html", data)
+	err = tmpl.ExecuteTemplate(w, "Index.html", data)
 	if err != nil {
 		http.Error(w, "Error executing template: "+err.Error(), http.StatusInternalServerError)
 	}
