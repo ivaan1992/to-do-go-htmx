@@ -25,8 +25,13 @@ func main() {
 	//Dark-Light Mode
 	gRouter.HandleFunc("/toggle-theme", handlers.ToggleThemeHandler)
 
-	//Tasks Handlers
+	// Tasks Handlers
 	gRouter.HandleFunc("/tasks", handlers.FetchTasks).Methods("GET")
+	gRouter.HandleFunc("/tasks", handlers.CreateTask).Methods("POST")
+	gRouter.HandleFunc("/tasks/update/{id}", handlers.UpdateTask).Methods("PUT", "POST")
+	gRouter.HandleFunc("/tasks/update-form/{id}", handlers.ShowUpdateForm).Methods("GET")
+	gRouter.HandleFunc("/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
+	gRouter.HandleFunc("/tasks/toggle/{id}", handlers.ToggleTask).Methods("POST")
 
 	//Run :3000 server
 	http.ListenAndServe(":3000", gRouter)

@@ -14,13 +14,16 @@
     </header>
 
     <main class="w-full min-h-screen bg-gray-100 flex flex-col items-center pt-10">
-            {{ template "TaskForm" }}
-            {{ template "TaskList" .}}
+            {{ template "AddTaskForm" }}
+            <div    
+                id="taskList"        
+                hx-get="/tasks"
+                hx-trigger="load"
+            >
+            </div>
+            <div id="taskForm"></div>
     </main>
 
-    <div>
-        {{template "TaskList"}}
-    </div>
     
 </body>
 </html>

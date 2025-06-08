@@ -1,15 +1,41 @@
 {{define "TaskList" }}
 
-    <div class="w-auto px-4">
+    <div id="taskList"   class="w-auto px-4">
         <ul class="bg-white rounded-md shadow-md divide-y divide-gray-200">
             {{range .Tasks}}
-                <li class="flex items-center px-6 py-4 w-[26rem]">
-                    <input
-                        type="checkbox"
-                        name="status"
-                        class="h-5 w-5 text-blue-600 rounded-full mr-4"
-                    />
-                    <span class="text-gray-700">{{ .Text }}</span>
+                <li 
+                    class="flex items-center px-6 py-4 w-[36rem] justify-between"
+                >
+                    <div>     
+                        <input
+                            type="checkbox"
+                            name="status"
+                            {{if .Status}}checked{{end}}
+                            hx-post="/tasks/toggle/{{.Id}}"
+                            hx-trigger="change"
+                            hx-target="#taskList"
+                            hx-swap="outerHTML"
+                            class="h-5 w-5 text-blue-600 rounded-full mr-4"
+                        />
+                        <span class="{{if .Status}}line-through{{end}} text-gray-700">{{ .Text }}</span>
+                    </div>
+                    <div class="flex ">
+                        <button
+                            href="#"
+                            hx-get="/tasks/update-form/{{.Id}}"
+                            hx-target="#taskForm"
+                        >
+                            Editar
+                        </button>
+                        <button
+                            hx-delete="/tasks/{{.Id}}"
+                            hx-target="#taskList"
+                            hx-confirm="Are you sure you want to delete this task?"
+                            class="ml-2 text-red-500"
+                        >
+                            Eliminar
+                        </button>
+                    </div>
                 </li>
             {{end}}
         </ul>
