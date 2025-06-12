@@ -51,7 +51,7 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 		Status: false,
 	}
 
-	err = models.AddNewTask(db.DB, task)
+	err = task.Save(db.DB)
 	if err != nil {
 		http.Error(w, "Error inserting task: "+err.Error(), http.StatusInternalServerError)
 		return
@@ -75,7 +75,13 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	taskId := vars["id"]
 
-	err = models.UpdateCurrentTask(db.DB, taskId, taskText)
+	task := models.Task{
+		Id:   taskId,
+		Text: taskText,
+	}
+
+	err = task.Update(db.DB)
+
 	if err != nil {
 		http.Error(w, "Error actualizando tarea: "+err.Error(), http.StatusInternalServerError)
 		return
@@ -89,7 +95,11 @@ func ShowUpdateForm(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	taskId := vars["id"]
 
-	task, err := models.GetTaskById(db.DB, taskId)
+	task := models.Task{
+		Id: taskId,
+	}
+
+	err := task.Read(db.DB)
 	if err != nil {
 		http.Error(w, "Tarea no encontrada: "+err.Error(), http.StatusNotFound)
 		return
@@ -106,7 +116,11 @@ func DeleteTask(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	taskId := vars["id"]
 
-	err := models.DeleteCurrentTask(db.DB, taskId)
+	task := models.Task{
+		Id: taskId,
+	}
+
+	err := task.Delete(db.DB)
 	if err != nil {
 		http.Error(w, "Error al eliminar la tarea: "+err.Error(), http.StatusInternalServerError)
 		return
@@ -123,7 +137,12 @@ func ToggleTask(w http.ResponseWriter, r *http.Request) {
 
 	status := r.FormValue("status") == "on"
 
-	err := models.CurrentToggleTask(db.DB, taskId, status)
+	task := models.Task{
+		Id:     taskId,
+		Status: status,
+	}
+
+	err := task.Check(db.DB)
 	if err != nil {
 		http.Error(w, "Error al cambiar estado: "+err.Error(), http.StatusInternalServerError)
 		return
