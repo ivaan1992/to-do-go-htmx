@@ -45,10 +45,11 @@ func (t *Task) Delete(db *sql.DB) error {
 		return err
 	}
 
-	rowsAffected, _ := result.RowsAffected()
+	rowsAffected, err := result.RowsAffected()
 
 	if err != nil {
 		return fmt.Errorf("error checking affected rows: %v", err)
+
 	}
 
 	if rowsAffected == 0 {
