@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/style/output.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <title>TODO LIST</title>
+</head>
+<body>
+
+    <header>
+        {{template "Header" .Theme}}
+    </header>
+
+    <main class="w-full min-h-screen bg-gray-100 flex flex-col items-center pt-10">
+            {{ template "AddTaskForm" }}
+            <div    
+                id="taskList"        
+                hx-get="/tasks"
+                hx-trigger="load"
+            >
+            </div>
+            <div id="taskForm"></div>
+    </main>
+
+    
+</body>
+</html>

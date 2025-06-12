@@ -1,0 +1,23 @@
+{{ define "AddTaskForm" }}
+
+    <div class="w-[38rem] px-4">
+        <form 
+            hx-post="/tasks"
+            hx-target="#taskList"
+            hx-swap="outerHTML"
+            hx-on::after-request="if(event.detail.successful) this.reset()"
+            class="bg-white rounded-md shadow-md px-6 py-4 mb-4 flex"
+        >
+            <button type="submit" class="border-2 border-solid border-black w-[25px] h-[25px]">
+                add
+            </button>
+            <input 
+                type="text"
+                class="w-[36rem] h-8 px-4 text-gray-700 rounded-md focus:outline-none"
+                placeholder="Create a new todo..."
+                name="TaskInput"
+            />
+        </form>
+    </div>
+
+{{ end }}

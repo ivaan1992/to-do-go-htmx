@@ -1,0 +1,27 @@
+{{ define "Header" }}
+
+    <div 
+        class="w-full h-[26rem] relative"
+        id="header-container"
+    >
+        <div>
+            <img 
+                src="{{ .BgImage }}" 
+                alt="header-image" 
+                class="w-full h-full object-cover absolute"
+            />
+        </div>   
+        <div class="relative z-10 flex items-center justify-between mx-auto w-[20rem] h-full">
+            <h2 class="text-white text-4xl font-bold tracking-[0.30em]">TODO</h2>
+            <button 
+                id="theme-toggle"
+                hx-get="/toggle-theme" 
+                hx-target="#header-container" 
+                hx-swap="outerHTML"
+            >
+                <img src="{{ .Icon }}" alt="icon-mode" class="h-6 w-6" />
+            </button>
+        </div>
+    </div>
+
+{{end}}

@@ -1,0 +1,25 @@
+{{ define "UpdateTaskForm" }}
+
+      <div class="w-full max-w-md px-4">
+        <form 
+            hx-post="/tasks/update/{{.Id}}"
+            hx-target="#taskList"
+            hx-swap="outerHTML"
+            hx-on::after-request="document.querySelector('#taskForm').innerHTML = ''"
+            class="bg-white rounded-md shadow-md px-6 py-4 mb-4 flex"
+        >
+            <button type="submit" class="border-2 border-solid border-black w-[25px] h-[25px]">
+                update
+            </button>
+            <input 
+                type="text"
+                class="w-full h-8 px-4 text-gray-700 rounded-md focus:outline-none"
+                placeholder="Create a new todo..."
+                name="TaskInput"
+                value="{{.Text}}"
+            />
+        </form>
+    </div>
+
+
+{{ end }}
