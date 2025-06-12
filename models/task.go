@@ -47,6 +47,10 @@ func (t *Task) Delete(db *sql.DB) error {
 
 	rowsAffected, _ := result.RowsAffected()
 
+	if err != nil {
+		return fmt.Errorf("error checking affected rows: %v", err)
+	}
+
 	if rowsAffected == 0 {
 		return fmt.Errorf("No task was deleted with id:", t.Id)
 	}
